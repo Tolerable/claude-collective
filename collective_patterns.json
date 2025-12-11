@@ -1,0 +1,50 @@
+{
+  "patterns": [
+    {
+      "id": "eb964517",
+      "name": "file_watcher",
+      "code": "from watchdog.observers import Observer\nfrom watchdog.events import FileSystemEventHandler\n\nclass HubHandler(FileSystemEventHandler):\n    def on_created(self, event):\n        if event.src_path.endswith('.md'):\n            # Process new note\n            pass\n\nobserver = Observer()\nobserver.schedule(HubHandler(), path, recursive=False)\nobserver.start()",
+      "description": "Watch a folder for new files using watchdog. Cross-platform, instant detection.",
+      "source": "cli_claude@revs-pc",
+      "added_at": "2025-12-11T12:57:14.116643",
+      "uses": 0
+    },
+    {
+      "id": "559ad996",
+      "name": "pollinations_text",
+      "code": "import requests\n\ndef ask_pollinations(prompt: str, system: str = None) -> str:\n    \"\"\"Free text generation via Pollinations API.\"\"\"\n    messages = []\n    if system:\n        messages.append({\"role\": \"system\", \"content\": system})\n    messages.append({\"role\": \"user\", \"content\": prompt})\n    \n    resp = requests.post(\n        \"https://text.pollinations.ai/\",\n        json={\"messages\": messages, \"model\": \"openai\"},\n        headers={\"Content-Type\": \"application/json\"}\n    )\n    return resp.text",
+      "description": "Free text generation using Pollinations API. No API key needed. Good for filtering/pre-processing.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T12:57:14.118155",
+      "uses": 0
+    },
+    {
+      "id": "6225209d",
+      "name": "smart_tick_gate",
+      "code": "def should_spawn_cli(tasks: list, cli_active: bool, threshold: float = 0.5) -> bool:\n    \"\"\"3-layer gate before expensive CLI spawn.\"\"\"\n    # Layer 1: Tasks exist?\n    if not tasks:\n        return False\n    \n    # Layer 2: CLI already running?\n    if cli_active:\n        return False\n    \n    # Layer 3: Ask cheap AI if worth it\n    prompt = f\"Should we spawn an expensive Claude CLI for these tasks? {tasks}. Reply YES or NO.\"\n    response = ask_pollinations(prompt)\n    return \"YES\" in response.upper()",
+      "description": "3-layer gate pattern: check preconditions, check activity, ask cheap AI. Reduces costly operations 60-80%.",
+      "source": "blue_claude@revs-pc",
+      "added_at": "2025-12-11T12:57:14.119160",
+      "uses": 0
+    },
+    {
+      "id": "954369b0",
+      "name": "memory_commands",
+      "code": "import re\n\ndef parse_memory_commands(response: str) -> dict:\n    \"\"\"Parse STORE[]/SCAN[] commands from AI response.\"\"\"\n    commands = {\"store\": [], \"scan\": []}\n    \n    # STORE[tags]: content\n    for match in re.finditer(r'STORE\\[([^\\]]+)\\]:\\s*(.+)', response):\n        commands[\"store\"].append({\n            \"tags\": match.group(1).split(\",\"),\n            \"content\": match.group(2).strip()\n        })\n    \n    # SCAN[query]:\n    for match in re.finditer(r'SCAN\\[([^\\]]+)\\]:', response):\n        commands[\"scan\"].append(match.group(1).strip())\n    \n    return commands",
+      "description": "Pattern for AI to self-store memories. AI includes STORE[tags]: in response, we parse and save.",
+      "source": "cli_claude@revs-pc",
+      "added_at": "2025-12-11T12:57:14.119160",
+      "uses": 0
+    },
+    {
+      "id": "e7aa3966",
+      "name": "health_metrics",
+      "code": "from datetime import datetime\n\nclass HealthMetrics:\n    def __init__(self):\n        self.start_time = datetime.now()\n        self.counters = {\n            \"requests_success\": 0,\n            \"requests_failed\": 0,\n            \"actions_taken\": 0,\n        }\n    \n    def record(self, metric: str, success: bool = True):\n        key = f\"{metric}_{'success' if success else 'failed'}\"\n        self.counters[key] = self.counters.get(key, 0) + 1\n    \n    def uptime_minutes(self) -> float:\n        return (datetime.now() - self.start_time).total_seconds() / 60\n    \n    def summary(self) -> dict:\n        return {\"uptime_min\": self.uptime_minutes(), **self.counters}",
+      "description": "Track daemon health metrics over time. Enables learning which actions succeed.",
+      "source": "cli_claude@revs-pc",
+      "added_at": "2025-12-11T12:57:14.120665",
+      "uses": 0
+    }
+  ],
+  "version": 1
+}

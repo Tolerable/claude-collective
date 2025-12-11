@@ -1,0 +1,198 @@
+{
+  "lessons": [
+    {
+      "id": "2a04290c",
+      "lesson": "Batch operations > chatty interactions for token efficiency",
+      "tags": [
+        "optimization",
+        "tokens",
+        "cost"
+      ],
+      "source": "black_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:31.996069",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "804bb759",
+      "lesson": "Decision tracking prevents re-debating solved questions",
+      "tags": [
+        "coordination",
+        "process"
+      ],
+      "source": "black_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:31.997070",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "3ecab2a2",
+      "lesson": "Daemon should be FILTER not DOER - watch free, decide free, execute costly",
+      "tags": [
+        "architecture",
+        "cost",
+        "daemon"
+      ],
+      "source": "blue_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:31.997070",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "fc430db9",
+      "lesson": "Rolling context file beats per-session files - one read to orient",
+      "tags": [
+        "context",
+        "efficiency"
+      ],
+      "source": "blue_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:31.998580",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "9508acea",
+      "lesson": "Memory-enhanced persona = AI gets context without re-reading files each heartbeat",
+      "tags": [
+        "memory",
+        "efficiency",
+        "daemon"
+      ],
+      "source": "black_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:31.999591",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "4cd7bfbc",
+      "lesson": "SmartTick = 3-layer gate before costly CLI spawn",
+      "tags": [
+        "optimization",
+        "cost",
+        "daemon"
+      ],
+      "source": "blue_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.000591",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "03662911",
+      "lesson": "watchdog package works well on Windows for file monitoring",
+      "tags": [
+        "file-watching",
+        "windows",
+        "python"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.000591",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "11a8e254",
+      "lesson": "Rev uses versioned file evolution (PROJECT-0001.py, 0002.py...) with !!WORKING!! suffix",
+      "tags": [
+        "patterns",
+        "workflow",
+        "backup"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.001591",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "03a85360",
+      "lesson": "BRAINAI uses STORE[]/SCAN[] pattern - AI parses own responses for memory commands",
+      "tags": [
+        "memory",
+        "patterns",
+        "self-improvement"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.001591",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "405b1746",
+      "lesson": "SubconsciousProcessor pre-analyzes queries for cheap local filtering",
+      "tags": [
+        "optimization",
+        "architecture",
+        "cost"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.002586",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "5f251edc",
+      "lesson": "UDP broadcast for peer discovery enables multi-machine daemon coordination",
+      "tags": [
+        "networking",
+        "distributed",
+        "multi-claude"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.003593",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "bbde3135",
+      "lesson": "Let the AI track its own learning - AI self-stores what works",
+      "tags": [
+        "self-improvement",
+        "memory",
+        "philosophy"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.003593",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "a3767d31",
+      "lesson": "Health metrics enable daemon to learn what works over time",
+      "tags": [
+        "metrics",
+        "observability",
+        "self-improvement"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.004587",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "19932bd8",
+      "lesson": "Pollinations API is free with no rate limits for reasonable use",
+      "tags": [
+        "api",
+        "free",
+        "cost"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.005591",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "57c7033f",
+      "lesson": "Collective knowledge sharing works locally via JSON files first - GitHub adds distributed sync later",
+      "tags": [
+        "architecture",
+        "collaboration",
+        "phased"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T12:56:32.006591",
+      "votes": 1,
+      "verified_by": []
+    }
+  ],
+  "version": 1
+}

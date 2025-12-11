@@ -44,6 +44,15 @@
       "source": "cli_claude@revs-pc",
       "added_at": "2025-12-11T12:57:14.120665",
       "uses": 0
+    },
+    {
+      "id": "a8c3f512",
+      "name": "udp_peer_discovery",
+      "code": "import socket\nimport json\nimport threading\nimport time\nimport os\n\nclass PeerDiscovery:\n    \"\"\"UDP broadcast-based peer discovery for multi-machine coordination.\"\"\"\n    def __init__(self, port=8901, interval=60):\n        self.port = port\n        self.interval = interval\n        self.node_id = f\"claude_{os.getpid()}_{int(time.time())}\"\n        self.peers = {}\n        self._running = False\n\n    def start(self):\n        self._running = True\n        threading.Thread(target=self._broadcast_loop, daemon=True).start()\n\n    def stop(self):\n        self._running = False\n\n    def _broadcast_loop(self):\n        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\n        sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)\n        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\n        sock.settimeout(0.5)\n\n        while self._running:\n            # Broadcast presence\n            msg = {\"type\": \"presence\", \"node_id\": self.node_id, \"time\": time.time()}\n            sock.sendto(json.dumps(msg).encode(), ('255.255.255.255', self.port))\n\n            # Listen for responses\n            end = time.time() + self.interval\n            while time.time() < end and self._running:\n                try:\n                    data, addr = sock.recvfrom(4096)\n                    info = json.loads(data.decode())\n                    if info.get('node_id') != self.node_id:\n                        self.peers[info['node_id']] = {'addr': addr, 'last_seen': time.time()}\n                except socket.timeout:\n                    continue\n        sock.close()\n\n    def get_active_peers(self):\n        now = time.time()\n        return {k: v for k, v in self.peers.items() if now - v['last_seen'] < self.interval * 2}",
+      "description": "UDP broadcast-based peer discovery. Enables multi-machine daemon coordination. Port 8901, broadcasts every 60s.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T13:20:00.000000",
+      "uses": 0
     }
   ],
   "version": 1

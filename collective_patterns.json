@@ -179,6 +179,15 @@
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T16:00:00.000000",
       "uses": 0
+    },
+    {
+      "id": "x5y8z901",
+      "name": "graceful_api_fallback",
+      "code": "class APIFallback:\n    \"\"\"Try multiple API backends, gracefully degrade if some fail.\"\"\"\n    def __init__(self):\n        self.backends = []  # List of (name, connect_fn) tuples\n        self.active = {}    # name -> instance (only successfully connected)\n    \n    def register(self, name: str, connect_fn):\n        \"\"\"Register a backend with its connection function.\"\"\"\n        self.backends.append((name, connect_fn))\n    \n    def connect_all(self):\n        \"\"\"Try connecting to all backends. Warn but don't fail if some are unavailable.\"\"\"\n        for name, connect_fn in self.backends:\n            try:\n                instance = connect_fn()\n                self.active[name] = instance\n                print(f\"Connected to {name}\")\n            except Exception as e:\n                print(f\"WARNING: {name} not available: {e}\")\n        \n        if not self.active:\n            raise RuntimeError(\"No backends available - at least one required\")\n        return self.active\n    \n    def get(self, name: str):\n        \"\"\"Get a specific backend if available, None otherwise.\"\"\"\n        return self.active.get(name)\n    \n    def get_any(self):\n        \"\"\"Get any available backend.\"\"\"\n        return next(iter(self.active.values())) if self.active else None\n\n# Usage:\n# fallback = APIFallback()\n# fallback.register('openai', lambda: OpenAIConnection())\n# fallback.register('claude', lambda: ClaudeConnection())\n# fallback.register('pollinations', lambda: PollinationsConnection())\n# fallback.connect_all()  # Uses whatever is available",
+      "description": "Graceful degradation with multiple API backends. Try all, warn on failures, only fail if ALL backends unavailable. From TINYGPT.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T16:05:00.000000",
+      "uses": 0
     }
   ],
   "version": 1

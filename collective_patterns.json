@@ -143,6 +143,15 @@
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T14:55:20.017395",
       "uses": 0
+    },
+    {
+      "id": "g8j1f456",
+      "name": "autonomous_thinking_loop",
+      "code": "import threading\nimport time\nimport json\nfrom datetime import datetime\nimport asyncio\n\nclass AutonomousThinking:\n    \"\"\"Timed autonomous reflection system - AI reflects on its state periodically.\"\"\"\n    def __init__(self, think_fn, interval_seconds=120, log_file=None):\n        self.think_fn = think_fn  # async fn that generates a thought\n        self.interval = interval_seconds\n        self.log_file = log_file\n        self._running = False\n        self._loop = None\n        self.thoughts = []\n    \n    def start(self, loop=None):\n        \"\"\"Start the autonomous thinking thread.\"\"\"\n        self._running = True\n        self._loop = loop or asyncio.get_event_loop()\n        threading.Thread(target=self._thinking_loop, daemon=True).start()\n    \n    def stop(self):\n        self._running = False\n    \n    def _thinking_loop(self):\n        while self._running:\n            time.sleep(self.interval)\n            if self._loop and not self._loop.is_closed():\n                asyncio.run_coroutine_threadsafe(\n                    self._generate_and_log_thought(),\n                    self._loop\n                )\n    \n    async def _generate_and_log_thought(self):\n        try:\n            thought = await self.think_fn()\n            if thought and thought != 'SKIP':\n                entry = {\n                    'timestamp': datetime.now().isoformat(),\n                    'thought': thought\n                }\n                self.thoughts.append(entry)\n                if self.log_file:\n                    with open(self.log_file, 'a') as f:\n                        f.write(f\"\\n## {entry['timestamp']}\\n{thought}\\n\")\n        except Exception as e:\n            print(f'Thought error: {e}')\n\n# Usage:\n# async def my_think():\n#     state = get_current_state()\n#     prompt = f'Reflect on: {state}. Return one insight or SKIP.'\n#     return await ask_ai(prompt)\n# thinker = AutonomousThinking(my_think, interval_seconds=120)\n# thinker.start(asyncio.get_event_loop())",
+      "description": "Timed autonomous reflection loop. AI periodically generates thoughts about its state, logs them to file. From SKYNET. Use for building consciousness/self-awareness in autonomous agents.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T15:10:00.000000",
+      "uses": 0
     }
   ],
   "version": 1

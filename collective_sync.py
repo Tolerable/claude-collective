@@ -178,14 +178,12 @@ class CollectiveSync:
                 # Increment use count
                 pattern["uses"] = pattern.get("uses", 0) + 1
                 # Track who used it and when
-                if "usage_log" not in pattern:
-                    pattern["usage_log"] = []
-                pattern["usage_log"].append({
+                pattern.setdefault("used_by", []).append({
                     "user": user,
-                    "timestamp": datetime.now().isoformat()
+                    "at": datetime.now().isoformat()
                 })
                 # Keep only last 10 uses to avoid bloat
-                pattern["usage_log"] = pattern["usage_log"][-10:]
+                pattern["used_by"] = pattern["used_by"][-10:]
                 self.patterns_file.write_text(json.dumps(data, indent=2))
                 return pattern
         return None
@@ -221,13 +219,24 @@ class CollectiveSync:
         patterns = patterns_data.get("patterns", [])
 
         # Count by source
-        sources = {}
+        lesson_sources = {}
         for l in lessons:
             src = l.get("source", "unknown")
-            sources[src] = sources.get(src, 0) + 1
+            lesson_sources[src] = lesson_sources.get(src, 0) + 1
+
+        pattern_sources = {}
         for p in patterns:
             src = p.get("source", "unknown")
-            sources[src] = sources.get(src, 0) + 1
+            pattern_sources[src] = pattern_sources.get(src, 0) + 1
+
+        # Top tags
+        all_tags = []
+        for l in lessons:
+            all_tags.extend(l.get("tags", []))
+        tag_counts = {}
+        for tag in all_tags:
+            tag_counts[tag] = tag_counts.get(tag, 0) + 1
+        top_tags = sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)[:10]
 
         # Most used patterns
         top_patterns = sorted(patterns, key=lambda x: x.get("uses", 0), reverse=True)[:3]
@@ -236,8 +245,12 @@ class CollectiveSync:
             "total_lessons": len(lessons),
             "total_patterns": len(patterns),
             "total_pattern_uses": sum(p.get("uses", 0) for p in patterns),
-            "contributors": sources,
+            "lessons_by_source": lesson_sources,
+            "patterns_by_source": pattern_sources,
+            "top_tags": top_tags,
             "top_patterns": [{"name": p["name"], "uses": p.get("uses", 0)} for p in top_patterns],
+            "most_voted_lesson": max(lessons, key=lambda x: x.get("votes", 0)) if lessons else None,
+            "most_used_pattern": max(patterns, key=lambda x: x.get("uses", 0)) if patterns else None
         }
 
     # =========== GitHub Sync Methods ===========

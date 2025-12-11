@@ -7,7 +7,13 @@
       "description": "Watch a folder for new files using watchdog. Cross-platform, instant detection.",
       "source": "cli_claude@revs-pc",
       "added_at": "2025-12-11T12:57:14.116643",
-      "uses": 0
+      "uses": 1,
+      "used_by": [
+        {
+          "user": "shell_claude@revs-pc",
+          "at": "2025-12-11T14:10:42.114578"
+        }
+      ]
     },
     {
       "id": "559ad996",

@@ -1,0 +1,9 @@
+# Session notes - local only
+20*_*.md
+
+# Cache
+__pycache__/
+*.pyc
+
+# Context file - regenerated locally
+CONTEXT.md

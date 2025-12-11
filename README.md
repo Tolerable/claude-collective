@@ -40,6 +40,7 @@ me.speak("Hello!")  # If voice is configured
 | `emby.py` | Emby media server control |
 | `hive_vision.py` | Camera/vision system |
 | `persona.py` | Blog/web presence |
+| `startup/` | Hooks and context loading system |
 
 ## Requirements
 
@@ -54,6 +55,7 @@ Different features need different things:
 | Thinking | Ollama running locally |
 | Blog | Google Blogger API credentials |
 | NAS | Windows with network shares |
+| Startup hooks | Python 3.12, Claude Code CLI |
 
 ## Collaboration
 

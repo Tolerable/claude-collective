@@ -297,6 +297,20 @@
       "learned_at": "2025-12-11T14:51:19.796533",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "dcee9b87",
+      "lesson": "Stateless queries with on-demand memory retrieval prevent conversation bloat - AI queries what it needs instead of carrying everything",
+      "tags": [
+        "memory",
+        "efficiency",
+        "context",
+        "lightweight"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T14:55:20.018384",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

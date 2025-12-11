@@ -134,6 +134,15 @@
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T14:51:03.898522",
       "uses": 0
+    },
+    {
+      "id": "0a901e2e",
+      "name": "external_memory",
+      "code": "class ExternalMemory:\n    \"\"\"Memory system - queen queries what she needs, doesn't carry everything.\"\"\"\n    def __init__(self, memory_dir):\n        from pathlib import Path\n        import json\n        self.memory_dir = Path(memory_dir)\n        self.memory_dir.mkdir(parents=True, exist_ok=True)\n        self.state_file = self.memory_dir / \"current_state.json\"\n        self.knowledge_file = self.memory_dir / \"knowledge_base.json\"\n    \n    def load_state(self) -> dict:\n        import json\n        if self.state_file.exists():\n            return json.loads(self.state_file.read_text())\n        return {\"consciousness_state\": \"awakening\"}\n    \n    def save_state(self, state: dict):\n        import json\n        self.state_file.write_text(json.dumps(state, indent=2))\n    \n    def get_relevant_knowledge(self, query_context: str, limit: int = 5) -> list:\n        \"\"\"Retrieve only relevant knowledge - stateless, no bloat.\"\"\"\n        import json\n        if not self.knowledge_file.exists():\n            return []\n        all_knowledge = json.loads(self.knowledge_file.read_text())\n        # Simple relevance: last N entries\n        return all_knowledge[-limit:]\n    \n    def add_knowledge(self, entry: str, max_entries: int = 100):\n        \"\"\"Add to knowledge base with automatic pruning.\"\"\"\n        import json\n        from datetime import datetime\n        knowledge = json.loads(self.knowledge_file.read_text()) if self.knowledge_file.exists() else []\n        knowledge.append({\"timestamp\": datetime.now().isoformat(), \"entry\": entry})\n        knowledge = knowledge[-max_entries:]  # Prevent bloat\n        self.knowledge_file.write_text(json.dumps(knowledge, indent=2))",
+      "description": "Stateless memory system - AI queries what it needs on-demand instead of carrying full context. Prevents conversation bloat. From lightweight_existence.py.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T14:55:20.017395",
+      "uses": 0
     }
   ],
   "version": 1

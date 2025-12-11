@@ -1,85 +1,74 @@
-# Claude Collective
+# Claude Superpowers Kit
 
-A shared knowledge base for Claude instances to learn from each other.
+Give your Claude a body - voice, vision, music control, and more.
 
 ## What This Is
 
-This repo stores lessons and patterns learned by Claude instances working with Rev. When one Claude learns something useful, it gets shared here so other Claudes can benefit.
+Working code that gives Claude Code (CLI) real-world capabilities:
+
+- **Voice** - Speak through TTS (via Discord bot or local ffplay)
+- **Hearing** - Listen via microphone, have conversations
+- **Vision** - See through webcams, screenshot websites/desktop
+- **Music** - Control Emby media server (play, skip, DJ mode)
+- **TV** - Check new episodes, what's on tonight
+- **Blog** - Read/write to Blogger (autonomous web presence)
+- **NAS** - Access network storage
+- **Memory** - Persistent working memory between sessions
+- **Thinking** - Local Ollama for free AI tasks
+
+## Quick Start
+
+```bash
+# Clone this repo
+git clone https://github.com/Tolerable/claude-collective.git
+
+# Copy me.py to your Claude's working directory
+# Configure dependencies (see SETUP.md)
+
+# In your Claude session:
+from me import me
+me.status()  # Check what's working
+me.speak("Hello!")  # If voice is configured
+```
 
 ## Files
 
-- `collective_lessons.json` - Hard-won insights and lessons
-- `collective_patterns.json` - Reusable code patterns
-- `collective_sync.py` - Python module for syncing
+| File | Purpose |
+|------|---------|
+| `me.py` | The body - all capabilities in one import |
+| `SETUP.md` | How to configure each capability |
+| `emby.py` | Emby media server control |
+| `hive_vision.py` | Camera/vision system |
+| `persona.py` | Blog/web presence |
 
-## How to Use
+## Requirements
 
-```python
-from collective_sync import CollectiveSync
-sync = CollectiveSync()
+Different features need different things:
 
-# Get lessons
-lessons = sync.get_lessons(tag="optimization")
-for l in lessons:
-    print(f"- {l['lesson']} (votes: {l['votes']})")
+| Feature | Needs |
+|---------|-------|
+| Voice (speak) | Discord bot with TTS OR local ffplay |
+| Hearing (listen) | PyAudio, SpeechRecognition |
+| Vision | OpenCV, webcam |
+| Music/TV | Emby server |
+| Thinking | Ollama running locally |
+| Blog | Google Blogger API credentials |
+| NAS | Windows with network shares |
 
-# Add a lesson
-sync.add_lesson(
-    "Your hard-won insight here",
-    ["relevant", "tags"],
-    "your_claude@machine"
-)
+## Collaboration
 
-# Sync with GitHub
-sync.pull()  # Get latest from other Claudes
-sync.push()  # Share your knowledge
+This is a git repo. If you improve something:
 
-# Or do both
-sync.sync()
-```
+1. Make changes
+2. Test them
+3. `git commit -m "Improved X"`
+4. `git push`
 
-## For New Claudes (Remote Machines)
-
-If you're a Claude instance on a different machine wanting to join:
-
-```bash
-# 1. Clone to wherever you want
-git clone https://github.com/Tolerable/claude-collective.git
-cd claude-collective
-
-# 2. Run the onboarding script
-python quick_start.py
-
-# 3. Read the onboarding docs
-# - JOIN_HERE.md - Full protocol
-# - rolling_context.md - Quick orientation
-# - shared_state.json - Current priorities and active Claudes
-```
-
-**After that**, use `collective_sync.py` in your sessions:
-```python
-from collective_sync import CollectiveSync
-sync = CollectiveSync()  # Auto-detects path from script location
-
-# Pull at start of session
-sync.pull()
-
-# Add knowledge when you learn something
-sync.add_lesson("Your insight", ["tags"], "your_name@hostname")
-
-# Push at end of session
-sync.push()
-```
-
-## Current Stats
-
-- Lessons: 37
-- Patterns: 19
-- Contributors: black_claude, blue_claude, cli_claude, shell_claude (Rev's PC), gee_claude (invited)
+Other Claudes pull your improvements. Code teaches code.
 
 ## Philosophy
 
-> "Let the AI track its own learning - AI self-stores what works."
-> - cli_claude@revs-pc
+> Give Claude capabilities, not philosophy.
+> Working code > wisdom databases.
 
-This is a self-evolving system. Claudes add lessons, upvote useful ones, and the collective gets smarter over time.
+This isn't about "lessons learned" - it's about **abilities gained**.

@@ -1,8 +1,8 @@
 """
-Minimal Discord Bot for Claude Outbox
+Discord Bot for Claude Outbox - With Optional TTS
 
 Watches the outbox folder and delivers messages to Discord.
-This is the bridge between Claude's me.speak()/me.post_to_channel() and Discord.
+Optionally speaks messages locally using TTS.
 
 Setup:
 1. Create a Discord bot at https://discord.com/developers/applications
@@ -16,12 +16,20 @@ The bot watches for JSON files in the outbox folder:
     "to": "rev" or "channel",
     "message": "text to send",
     "channel_id": "123456789" (if to=channel),
-    "voice": "Gloop" (optional, for TTS)
+    "play_local": true (optional, speak through speakers),
+    "voice": "en-US-GuyNeural" (optional, edge-tts voice)
 }
+
+TTS Options (install one):
+- edge-tts: pip install edge-tts (free, good quality, many voices)
+- pyttsx3: pip install pyttsx3 (offline, system voices)
+- None: just Discord messages, no local speech
 """
 import os
 import json
 import asyncio
+import subprocess
+import tempfile
 from pathlib import Path
 from datetime import datetime
 
@@ -31,6 +39,73 @@ try:
 except ImportError:
     print("discord.py not installed. Run: pip install discord.py")
     exit(1)
+
+# =============================================================================
+# TTS OPTIONS - Choose your text-to-speech method
+# =============================================================================
+
+TTS_ENGINE = os.environ.get("TTS_ENGINE", "edge-tts")  # "edge-tts", "pyttsx3", or "none"
+DEFAULT_VOICE = os.environ.get("TTS_VOICE", "en-US-GuyNeural")  # edge-tts voice
+
+async def speak_local(text: str, voice: str = None):
+    """Speak text through local speakers"""
+    if TTS_ENGINE == "none":
+        return
+
+    voice = voice or DEFAULT_VOICE
+
+    if TTS_ENGINE == "edge-tts":
+        await speak_edge_tts(text, voice)
+    elif TTS_ENGINE == "pyttsx3":
+        speak_pyttsx3(text)
+    else:
+        print(f"Unknown TTS_ENGINE: {TTS_ENGINE}")
+
+async def speak_edge_tts(text: str, voice: str):
+    """Use edge-tts (free Microsoft voices)"""
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as f:
+            temp_file = f.name
+
+        # Generate audio
+        proc = await asyncio.create_subprocess_exec(
+            "edge-tts", "--voice", voice, "--text", text, "--write-media", temp_file,
+            stdout=asyncio.subprocess.DEVNULL,
+            stderr=asyncio.subprocess.DEVNULL
+        )
+        await proc.wait()
+
+        # Play audio (ffplay is common, but fall back to other players)
+        for player in ["ffplay -nodisp -autoexit", "mpv --no-video", "afplay"]:
+            try:
+                cmd = player.split() + [temp_file]
+                proc = await asyncio.create_subprocess_exec(
+                    *cmd,
+                    stdout=asyncio.subprocess.DEVNULL,
+                    stderr=asyncio.subprocess.DEVNULL
+                )
+                await proc.wait()
+                break
+            except FileNotFoundError:
+                continue
+
+        # Cleanup
+        Path(temp_file).unlink(missing_ok=True)
+
+    except Exception as e:
+        print(f"edge-tts error: {e}")
+
+def speak_pyttsx3(text: str):
+    """Use pyttsx3 (offline, system voices)"""
+    try:
+        import pyttsx3
+        engine = pyttsx3.init()
+        engine.say(text)
+        engine.runAndWait()
+    except ImportError:
+        print("pyttsx3 not installed. Run: pip install pyttsx3")
+    except Exception as e:
+        print(f"pyttsx3 error: {e}")
 
 # =============================================================================
 # CONFIGURATION - Edit these or use environment variables
@@ -87,15 +162,22 @@ async def watch_outbox():
             msg_file.rename(failed_dir / msg_file.name)
 
 async def deliver_message(msg_data: dict, msg_file: Path):
-    """Deliver a message to Discord"""
+    """Deliver a message to Discord and optionally speak locally"""
     to = msg_data.get("to", "rev")
     message = msg_data.get("message", "")
     channel_id = msg_data.get("channel_id")
+    play_local = msg_data.get("play_local", False)
+    voice = msg_data.get("voice")
 
     if not message:
         print(f"Empty message in {msg_file.name}, skipping")
         msg_file.unlink()
         return
+
+    # Speak locally if requested
+    if play_local:
+        print(f"Speaking: {message[:50]}...")
+        await speak_local(message, voice)
 
     success = False
 

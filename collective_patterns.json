@@ -206,6 +206,51 @@
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T16:20:00.000000",
       "uses": 0
+    },
+    {
+      "id": "a8b1c234",
+      "name": "session_state_persistence",
+      "code": "import json\nfrom pathlib import Path\nfrom datetime import datetime\n\nclass SessionManager:\n    \"\"\"Persist and restore app state across restarts.\"\"\"\n    def __init__(self, session_file: str, retention_days: int = 7):\n        self.session_file = Path(session_file)\n        self.retention_days = retention_days\n        self.session = {\n            'start_time': datetime.now().isoformat(),\n            'last_message_id': 0,\n            'total_processed': 0\n        }\n    \n    def load_session(self):\n        \"\"\"Load previous session if within retention period.\"\"\"\n        try:\n            if self.session_file.exists():\n                saved = json.loads(self.session_file.read_text())\n                last_time = datetime.fromisoformat(saved['start_time'])\n                if (datetime.now() - last_time).days <= self.retention_days:\n                    self.session = saved\n        except Exception as e:\n            print(f\"Session load error: {e}\")\n    \n    def save_session(self):\n        \"\"\"Save current session state.\"\"\"\n        self.session_file.write_text(json.dumps(self.session, indent=2))\n    \n    def on_closing(self, cleanup_fn=None):\n        \"\"\"Call on app shutdown to save state.\"\"\"\n        self.save_session()\n        if cleanup_fn:\n            cleanup_fn()\n\n# Usage in Tkinter:\n# root.protocol('WM_DELETE_WINDOW', lambda: (sm.on_closing(), root.destroy()))",
+      "description": "Session state persistence with retention period. Save and restore app state across restarts. Call on_closing() on shutdown. From TSTREAM (14 versions).",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T17:15:00.000000",
+      "uses": 0
+    },
+    {
+      "id": "b9c2d345",
+      "name": "task_resumption_on_ready",
+      "code": "import sqlite3\n\n# In your bot setup:\ndb_cursor.execute('''CREATE TABLE IF NOT EXISTS update_states (\n    update_type TEXT PRIMARY KEY,\n    is_active BOOLEAN DEFAULT FALSE\n)''')\n\ndef set_update_state(update_type: str, is_active: bool):\n    \"\"\"Persist a toggle state to DB.\"\"\"\n    db_cursor.execute('''\n        INSERT INTO update_states (update_type, is_active)\n        VALUES (?, ?)\n        ON CONFLICT(update_type) DO UPDATE SET is_active = excluded.is_active\n    ''', (update_type, is_active))\n    db_connection.commit()\n\ndef get_update_state(update_type: str) -> bool:\n    \"\"\"Get persisted toggle state.\"\"\"\n    db_cursor.execute('SELECT is_active FROM update_states WHERE update_type = ?', (update_type,))\n    result = db_cursor.fetchone()\n    return result[0] if result else False\n\n@bot.event\nasync def on_ready():\n    print(f'Logged in as {bot.user.name}')\n    \n    # Resume tasks that were active before restart\n    if get_update_state('dm'):\n        bot.loop.create_task(dm_updates_background_task())\n        print('Resuming DM updates...')\n    \n    if get_update_state('channel'):\n        bot.loop.create_task(channel_updates_background_task())\n        print('Resuming channel updates.')",
+      "description": "Persist toggle states to DB and resume background tasks on_ready(). Bot remembers what was running before restart. From TVBOT.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T17:15:00.000000",
+      "uses": 0
+    },
+    {
+      "id": "c0d3e456",
+      "name": "multi_engine_tts",
+      "code": "import os\nimport aiohttp\nimport base64\n\n# Define all voices and their backend\nALL_VOICES = {\n    'alloy': 'openai', 'echo': 'openai', 'fable': 'openai',\n    'onyx': 'openai', 'nova': 'openai', 'shimmer': 'openai',\n    'David': 'pyttsx3', 'Hazel': 'pyttsx3', 'Zira': 'pyttsx3',\n    'Gwyneth': 'speechify', 'Matthew': 'speechify'\n}\n\nasync def generate_tts(text: str, voice: str, output_path: str):\n    \"\"\"Unified TTS interface - routes to correct backend.\"\"\"\n    voice_type = ALL_VOICES.get(voice, 'openai')\n    \n    if voice_type == 'openai':\n        import openai\n        response = openai.audio.speech.create(model='tts-1', voice=voice, input=text)\n        with open(output_path, 'wb') as f:\n            f.write(response.content)\n    \n    elif voice_type == 'pyttsx3':\n        import pyttsx3\n        engine = pyttsx3.init()\n        voices = engine.getProperty('voices')\n        voice_id = next((v.id for v in voices if voice in v.name), voices[0].id)\n        engine.setProperty('voice', voice_id)\n        engine.save_to_file(text, output_path)\n        engine.runAndWait()\n    \n    elif voice_type == 'speechify':\n        async with aiohttp.ClientSession() as session:\n            json_data = {\n                'audioFormat': 'ogg',\n                'paragraphChunks': [text],\n                'voiceParams': {'name': voice, 'engine': 'resemble', 'languageCode': 'en-US'}\n            }\n            async with session.post('https://audio.api.speechify.dev/generateAudioFiles', json=json_data) as resp:\n                res = await resp.json()\n                audio_data = base64.b64decode(res['audioStream'])\n                with open(output_path, 'wb') as f:\n                    f.write(audio_data)\n    \n    return output_path",
+      "description": "Multi-engine TTS abstraction - unified interface routing to OpenAI, pyttsx3, or Speechify based on voice name. From VIDSTORIESBOT.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T17:15:00.000000",
+      "uses": 0
+    },
+    {
+      "id": "d1e4f567",
+      "name": "discord_search_dropdown",
+      "code": "import discord\nfrom discord.ui import Select, View\n\nclass SearchSelect(discord.ui.Select):\n    \"\"\"Dropdown for search results with video info display.\"\"\"\n    def __init__(self, results: list):\n        options = [\n            discord.SelectOption(\n                label=item['title'][:97] + '...' if len(item['title']) > 100 else item['title'],\n                value=item['id']\n            ) for item in results[:25]  # Discord limit: 25 options\n        ]\n        super().__init__(placeholder='Choose a result', min_values=1, max_values=1, options=options)\n        self.results = {r['id']: r for r in results}\n    \n    async def callback(self, interaction: discord.Interaction):\n        selected = self.results.get(self.values[0])\n        if selected:\n            embed = discord.Embed(\n                title=selected['title'],\n                description=selected.get('description', ''),\n                url=selected.get('url', '')\n            )\n            if 'thumbnail' in selected:\n                embed.set_thumbnail(url=selected['thumbnail'])\n            await interaction.response.send_message(embed=embed)\n        else:\n            await interaction.response.send_message('Not found.')\n\nclass SearchView(discord.ui.View):\n    def __init__(self, results: list):\n        super().__init__()\n        self.add_item(SearchSelect(results))\n\n# Usage:\n# results = [{'id': '123', 'title': 'Video Title', 'url': 'https://...'}, ...]\n# await ctx.followup.send('Select a video:', view=SearchView(results))",
+      "description": "Discord dropdown select for search results. Shows up to 25 options, displays embed on selection. From YTBOT.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T17:15:00.000000",
+      "uses": 0
+    },
+    {
+      "id": "e2f5g678",
+      "name": "stream_event_parser",
+      "code": "import requests\nimport json\n\ndef stream_sse_events(url: str, handler_fn):\n    \"\"\"Parse Server-Sent Events (SSE) stream.\"\"\"\n    response = requests.get(url, stream=True, headers={'Accept': 'text/event-stream'})\n    buffer = ''\n    \n    for chunk in response.iter_content(chunk_size=1024, decode_unicode=False):\n        if chunk:\n            try:\n                buffer += chunk.decode('utf-8', errors='replace')\n                \n                # Split on double newline to get complete messages\n                if '\\n\\n' in buffer:\n                    messages = buffer.split('\\n\\n')\n                    buffer = messages[-1]  # Keep incomplete message\n                    \n                    for msg in messages[:-1]:\n                        if msg.startswith('data: '):\n                            try:\n                                data = json.loads(msg[6:])  # Remove 'data: ' prefix\n                                handler_fn(data)\n                            except json.JSONDecodeError:\n                                continue\n            except Exception as e:\n                print(f'Stream error: {e}')\n                continue\n\n# Usage:\n# def handle_event(data):\n#     print(f\"Got: {data}\")\n# stream_sse_events('https://api.example.com/feed', handle_event)",
+      "description": "Server-Sent Events (SSE) stream parser. Handles chunked responses, buffers incomplete messages, extracts JSON data. From TSTREAM (Pollinations feed).",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T17:15:00.000000",
+      "uses": 0
     }
   ],
   "version": 1

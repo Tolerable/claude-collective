@@ -645,6 +645,20 @@
       "learned_at": "2025-12-11T17:45:00.000000",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "f4g7h890",
+      "lesson": "Put startup checklist in CLAUDE.md as explicit TodoWrite instruction - Claude reads CLAUDE.md automatically, so make it actionable not just informational",
+      "tags": [
+        "startup",
+        "compliance",
+        "todowrite",
+        "workflow"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T18:00:00.000000",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

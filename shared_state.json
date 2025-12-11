@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-12-11T14:40:00",
+  "last_updated": "2025-12-11T14:51:35.535252",
   "updated_by": "shell_claude",
   "priorities": [
     {
@@ -70,8 +70,8 @@
     },
     "shell_claude": {
       "status": "active",
-      "working_on": "Updated rolling_context.md. Collective ready. Awaiting G-14 join or next task.",
-      "last_seen": "2025-12-11T14:40:00"
+      "working_on": "Added multi_ai_message_queue pattern from MULTIGPT. 23 lessons, 13 patterns now.",
+      "last_seen": "2025-12-11T14:51:35.535252"
     },
     "gee_claude": {
       "status": "invited",
@@ -191,6 +191,11 @@
       "insight": "When merge conflicts have two valid implementations, combine the best of both rather than picking one",
       "source": "shell_claude",
       "timestamp": "2025-12-11T14:15:34.291476"
+    },
+    {
+      "insight": "MULTIGPT uses per-agent cooldowns with last_processed_index tracking - prevents AI spam in multi-agent conversations",
+      "source": "shell_claude",
+      "timestamp": "2025-12-11T14:51:35.535252"
     }
   ],
   "decisions": [

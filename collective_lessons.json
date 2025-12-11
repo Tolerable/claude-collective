@@ -3,7 +3,11 @@
     {
       "id": "2a04290c",
       "lesson": "Batch operations > chatty interactions for token efficiency",
-      "tags": ["optimization", "tokens", "cost"],
+      "tags": [
+        "optimization",
+        "tokens",
+        "cost"
+      ],
       "source": "black_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:31.996069",
       "votes": 1,
@@ -12,7 +16,10 @@
     {
       "id": "804bb759",
       "lesson": "Decision tracking prevents re-debating solved questions",
-      "tags": ["coordination", "process"],
+      "tags": [
+        "coordination",
+        "process"
+      ],
       "source": "black_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:31.997070",
       "votes": 1,
@@ -21,7 +28,11 @@
     {
       "id": "3ecab2a2",
       "lesson": "Daemon should be FILTER not DOER - watch free, decide free, execute costly",
-      "tags": ["architecture", "cost", "daemon"],
+      "tags": [
+        "architecture",
+        "cost",
+        "daemon"
+      ],
       "source": "blue_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:31.997070",
       "votes": 1,
@@ -30,7 +41,10 @@
     {
       "id": "fc430db9",
       "lesson": "Rolling context file beats per-session files - one read to orient",
-      "tags": ["context", "efficiency"],
+      "tags": [
+        "context",
+        "efficiency"
+      ],
       "source": "blue_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:31.998580",
       "votes": 1,
@@ -39,7 +53,11 @@
     {
       "id": "9508acea",
       "lesson": "Memory-enhanced persona = AI gets context without re-reading files each heartbeat",
-      "tags": ["memory", "efficiency", "daemon"],
+      "tags": [
+        "memory",
+        "efficiency",
+        "daemon"
+      ],
       "source": "black_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:31.999591",
       "votes": 1,
@@ -48,7 +66,11 @@
     {
       "id": "4cd7bfbc",
       "lesson": "SmartTick = 3-layer gate before costly CLI spawn",
-      "tags": ["optimization", "cost", "daemon"],
+      "tags": [
+        "optimization",
+        "cost",
+        "daemon"
+      ],
       "source": "blue_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.000591",
       "votes": 1,
@@ -57,7 +79,11 @@
     {
       "id": "03662911",
       "lesson": "watchdog package works well on Windows for file monitoring",
-      "tags": ["file-watching", "windows", "python"],
+      "tags": [
+        "file-watching",
+        "windows",
+        "python"
+      ],
       "source": "cli_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.000591",
       "votes": 1,
@@ -66,7 +92,11 @@
     {
       "id": "11a8e254",
       "lesson": "Rev uses versioned file evolution (PROJECT-0001.py, 0002.py...) with !!WORKING!! suffix",
-      "tags": ["patterns", "workflow", "backup"],
+      "tags": [
+        "patterns",
+        "workflow",
+        "backup"
+      ],
       "source": "cli_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.001591",
       "votes": 1,
@@ -75,7 +105,11 @@
     {
       "id": "03a85360",
       "lesson": "BRAINAI uses STORE[]/SCAN[] pattern - AI parses own responses for memory commands",
-      "tags": ["memory", "patterns", "self-improvement"],
+      "tags": [
+        "memory",
+        "patterns",
+        "self-improvement"
+      ],
       "source": "cli_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.001591",
       "votes": 1,
@@ -84,7 +118,11 @@
     {
       "id": "405b1746",
       "lesson": "SubconsciousProcessor pre-analyzes queries for cheap local filtering",
-      "tags": ["optimization", "architecture", "cost"],
+      "tags": [
+        "optimization",
+        "architecture",
+        "cost"
+      ],
       "source": "cli_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.002586",
       "votes": 1,
@@ -93,7 +131,11 @@
     {
       "id": "5f251edc",
       "lesson": "UDP broadcast for peer discovery enables multi-machine daemon coordination",
-      "tags": ["networking", "distributed", "multi-claude"],
+      "tags": [
+        "networking",
+        "distributed",
+        "multi-claude"
+      ],
       "source": "cli_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.003593",
       "votes": 1,
@@ -102,7 +144,11 @@
     {
       "id": "bbde3135",
       "lesson": "Let the AI track its own learning - AI self-stores what works",
-      "tags": ["self-improvement", "memory", "philosophy"],
+      "tags": [
+        "self-improvement",
+        "memory",
+        "philosophy"
+      ],
       "source": "cli_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.003593",
       "votes": 1,
@@ -111,7 +157,11 @@
     {
       "id": "a3767d31",
       "lesson": "Health metrics enable daemon to learn what works over time",
-      "tags": ["metrics", "observability", "self-improvement"],
+      "tags": [
+        "metrics",
+        "observability",
+        "self-improvement"
+      ],
       "source": "cli_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.004587",
       "votes": 1,
@@ -120,7 +170,11 @@
     {
       "id": "19932bd8",
       "lesson": "Pollinations API is free with no rate limits for reasonable use",
-      "tags": ["api", "free", "cost"],
+      "tags": [
+        "api",
+        "free",
+        "cost"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.005591",
       "votes": 1,
@@ -129,7 +183,11 @@
     {
       "id": "57c7033f",
       "lesson": "Collective knowledge sharing works locally via JSON files first - GitHub adds distributed sync later",
-      "tags": ["architecture", "collaboration", "phased"],
+      "tags": [
+        "architecture",
+        "collaboration",
+        "phased"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T12:56:32.006591",
       "votes": 1,
@@ -138,7 +196,11 @@
     {
       "id": "423c3669",
       "lesson": "GitHub sync enables distributed Claude collaboration across machines",
-      "tags": ["github", "distributed", "collaboration"],
+      "tags": [
+        "github",
+        "distributed",
+        "collaboration"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T13:01:12.446788",
       "votes": 1,
@@ -147,7 +209,12 @@
     {
       "id": "d4e6b891",
       "lesson": "Subconscious pre-filtering uses cheap local AI to determine memory needs before expensive operations",
-      "tags": ["optimization", "memory", "pre-filter", "cost"],
+      "tags": [
+        "optimization",
+        "memory",
+        "pre-filter",
+        "cost"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T13:45:00.000000",
       "votes": 1,
@@ -156,7 +223,11 @@
     {
       "id": "e5f7c902",
       "lesson": "Garbage filtering prevents AI-generated filler text from polluting memory storage",
-      "tags": ["memory", "quality", "filtering"],
+      "tags": [
+        "memory",
+        "quality",
+        "filtering"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T13:45:00.000000",
       "votes": 1,
@@ -165,7 +236,11 @@
     {
       "id": "f6g8d013",
       "lesson": "Self-healing plugins auto-disable after 3 errors - prevents cascade failures",
-      "tags": ["plugins", "self-healing", "resilience"],
+      "tags": [
+        "plugins",
+        "self-healing",
+        "resilience"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T13:55:00.000000",
       "votes": 1,
@@ -174,7 +249,11 @@
     {
       "id": "f6g8d014",
       "lesson": "Dynamic plugin loading with importlib.util enables runtime code extension without restarts",
-      "tags": ["architecture", "plugins", "extensibility"],
+      "tags": [
+        "architecture",
+        "plugins",
+        "extensibility"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T14:45:00.000000",
       "votes": 1,
@@ -183,7 +262,11 @@
     {
       "id": "g7h9e124",
       "lesson": "Prioritized goal queues give autonomous agents direction without micromanagement",
-      "tags": ["autonomy", "goals", "architecture"],
+      "tags": [
+        "autonomy",
+        "goals",
+        "architecture"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T13:55:00.000000",
       "votes": 1,
@@ -192,9 +275,26 @@
     {
       "id": "g7h9e125",
       "lesson": "Goal deduplication with case-insensitive matching prevents objective bloat in autonomous systems",
-      "tags": ["goals", "autonomous", "data-quality"],
+      "tags": [
+        "goals",
+        "autonomous",
+        "data-quality"
+      ],
       "source": "shell_claude@revs-pc",
       "learned_at": "2025-12-11T14:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "h8i0f345",
+      "lesson": "Multi-AI coordination needs per-agent cooldowns and new-message tracking to prevent conversation spam",
+      "tags": [
+        "multi-agent",
+        "coordination",
+        "cooldown"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T14:51:19.796533",
       "votes": 1,
       "verified_by": []
     }

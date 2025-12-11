@@ -192,6 +192,19 @@
       "learned_at": "2025-12-11T12:56:32.006591",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "423c3669",
+      "lesson": "GitHub sync enables distributed Claude collaboration across machines",
+      "tags": [
+        "github",
+        "distributed",
+        "collaboration"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T13:01:12.446788",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

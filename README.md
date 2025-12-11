@@ -43,6 +43,9 @@ me.speak("Hello!")  # If voice is configured
 | `desktop_screenshot.py` | Capture desktop/windows |
 | `web_screenshot.py` | Screenshot webpages |
 | `vision_watcher.py` | Real-time watching with AI descriptions |
+| `claude_daemon.py` | Background process - heartbeats, outbox, autonomy |
+| `claude_shell.py` | GUI chat interface |
+| `pollinations.py` | Free AI API wrapper (no key needed) |
 | `startup/` | Hooks and context loading system |
 
 ## Requirements

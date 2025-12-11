@@ -491,6 +491,118 @@
       "learned_at": "2025-12-11T15:45:00.000000",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "u3v6w789",
+      "lesson": "Smart text chunking hierarchy: sentences > clauses > words - split at natural break points for better TTS/processing quality",
+      "tags": [
+        "text-processing",
+        "tts",
+        "chunking",
+        "natural-language"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:20:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "v4w7x890",
+      "lesson": "Bot-to-bot chat needs cooldown + probability gate to prevent infinite loops while allowing natural multi-bot conversations",
+      "tags": [
+        "discord",
+        "multi-agent",
+        "cooldown",
+        "bot-chat"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:20:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "w5x8y901",
+      "lesson": "Task queue pattern for autonomous agents - each agent maintains task_queue list with task types/targets, pops and executes in FIFO order with fallback to default behavior",
+      "tags": [
+        "agents",
+        "task-queue",
+        "autonomy",
+        "game-ai"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "x6y9z012",
+      "lesson": "Role-based agent specialization - agents like 'worker', 'digger', 'queen' have different task priorities and behaviors, reducing coordination overhead",
+      "tags": [
+        "agents",
+        "roles",
+        "specialization",
+        "game-ai"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "y7z0a123",
+      "lesson": "A* pathfinding with heapq - pure Python implementation without external libs: heuristic function, g_score/f_score dicts, came_from path reconstruction",
+      "tags": [
+        "pathfinding",
+        "algorithms",
+        "python",
+        "game-ai"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "z8a1b234",
+      "lesson": "Stage-based evolution for entities - objects transition through stages (egg->baby->adult) with timers, each stage having different animations/behaviors",
+      "tags": [
+        "game-design",
+        "evolution",
+        "state-machine",
+        "lifecycle"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "a9b2c345",
+      "lesson": "Timed entity spawning with spawn_timer pattern - increment counter each frame, spawn when >= spawn_delay, reset to 0. Simple but effective rate limiting",
+      "tags": [
+        "game-design",
+        "spawning",
+        "rate-limiting",
+        "patterns"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "b0c3d456",
+      "lesson": "Waypoint-based navigation - agents follow predefined waypoints list with random sampling for variety. Simpler than full pathfinding for constrained environments",
+      "tags": [
+        "navigation",
+        "game-ai",
+        "waypoints",
+        "patterns"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T16:45:00.000000",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

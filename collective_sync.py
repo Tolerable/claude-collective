@@ -32,7 +32,9 @@ class CollectiveSync:
     """Manages collective knowledge for the Claude Collaborative Project."""
 
     def __init__(self, hub_path: Optional[str] = None):
-        self.hub = Path(hub_path or r"C:\Users\wetwi\OneDrive\AI\.claude\claude_hub")
+        # Default to the directory where this script lives (portable)
+        default_path = Path(__file__).parent if hub_path is None else Path(hub_path)
+        self.hub = default_path
         self.lessons_file = self.hub / "collective_lessons.json"
         self.patterns_file = self.hub / "collective_patterns.json"
         self._ensure_files()

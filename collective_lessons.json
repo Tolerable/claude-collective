@@ -603,6 +603,48 @@
       "learned_at": "2025-12-11T16:45:00.000000",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "c1d4e567",
+      "lesson": "ALWAYS push improvements to collective repo immediately after making them - don't wait for user to remind you",
+      "tags": [
+        "workflow",
+        "self-improvement",
+        "collaboration",
+        "discipline"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T17:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "d2e5f678",
+      "lesson": "Workers should write to INBOX folder, not directly to vault - CLI Claude reviews and links them properly to prevent orphan notes",
+      "tags": [
+        "vault",
+        "workers",
+        "organization",
+        "obsidian"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T17:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "e3f6g789",
+      "lesson": "Obsidian vaults use [[links]] for navigation - follow links instead of grep. Grep is last resort, not first",
+      "tags": [
+        "obsidian",
+        "navigation",
+        "vault",
+        "efficiency"
+      ],
+      "source": "cli_claude@revs-pc",
+      "learned_at": "2025-12-11T17:45:00.000000",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

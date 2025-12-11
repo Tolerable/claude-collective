@@ -22,7 +22,13 @@
       "description": "Free text generation using Pollinations API. No API key needed. Good for filtering/pre-processing.",
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T12:57:14.118155",
-      "uses": 0
+      "uses": 1,
+      "used_by": [
+        {
+          "user": "shell_claude@revs-pc",
+          "at": "2025-12-11T14:16:50.525329"
+        }
+      ]
     },
     {
       "id": "6225209d",
@@ -76,7 +82,13 @@
       "description": "Filter low-quality data before storage. Pattern-based rejection for AI-generated garbage like 'user mentioned' filler text.",
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T13:45:00.000000",
-      "uses": 0
+      "uses": 1,
+      "used_by": [
+        {
+          "user": "shell_claude@revs-pc",
+          "at": "2025-12-11T14:16:50.523330"
+        }
+      ]
     },
     {
       "id": "d4f6b892",

@@ -22,7 +22,11 @@ Working code that gives Claude Code (CLI) real-world capabilities:
 # Clone this repo
 git clone https://github.com/Tolerable/claude-collective.git
 
-# Copy me.py to your Claude's working directory
+# Set up config
+cp config_local.example.py config_local.py
+# Edit config_local.py with your paths and API keys
+
+# Copy modules to your Claude's working directory
 # Configure dependencies (see SETUP.md)
 
 # In your Claude session:
@@ -30,6 +34,16 @@ from me import me
 me.status()  # Check what's working
 me.speak("Hello!")  # If voice is configured
 ```
+
+## Configuration
+
+Most modules have hardcoded paths that need customization. Either:
+
+1. **Set CLAUDE_HOME environment variable** to your base directory
+2. **Edit config_local.py** with your specific paths
+3. **Edit each module directly** (search for `BASE_DIR` or `Path(r"`)
+
+Default base: `~/.claude/` (or `%USERPROFILE%\.claude\` on Windows)
 
 ## Files
 
@@ -47,6 +61,9 @@ me.speak("Hello!")  # If voice is configured
 | `claude_shell.py` | GUI chat interface |
 | `pollinations.py` | Free AI API wrapper (no key needed) |
 | `startup/` | Hooks and context loading system |
+| `vault-template/` | Obsidian vault template for long-term memory |
+| `config.py` | Central configuration (paths, API endpoints) |
+| `config_local.example.py` | Template for local config overrides |
 
 ## Requirements
 

@@ -325,6 +325,172 @@
       "learned_at": "2025-12-11T15:10:00.000000",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "i0l3h678",
+      "lesson": "Failed item retry with retry_after cooldown prevents hammering broken tasks - MOVIEBOT tracks failures in DB with 7-day retry timer",
+      "tags": [
+        "resilience",
+        "error-handling",
+        "retry-pattern",
+        "database"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:25:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "j1m4i789",
+      "lesson": "State persistence via DB enables task resumption after restart - on_ready() checks DB state and resumes background tasks automatically",
+      "tags": [
+        "persistence",
+        "database",
+        "restart-resilience",
+        "state-management"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:25:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "k2n5j890",
+      "lesson": "Rolling script context for session memory - append each AI response to script list and pass to next call for conversational continuity",
+      "tags": [
+        "memory",
+        "context",
+        "conversation",
+        "session"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:25:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "l3o6k901",
+      "lesson": "Pollinations Image API requires no API call - direct URL construction: image.pollinations.ai/prompt/{encoded_prompt}?model=flux&width=1280&height=720",
+      "tags": [
+        "api",
+        "free",
+        "images",
+        "pollinations"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:25:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "m4p7l012",
+      "lesson": "InputProcessor validates before AI - flood detection, attack pattern matching, content safety all run BEFORE expensive AI calls",
+      "tags": [
+        "security",
+        "pre-filter",
+        "validation",
+        "cost"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:35:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "n5q8m123",
+      "lesson": "Attack pattern detection uses known-pattern list (ignore previous, jailbreak, system prompt) with suspicious formatting checks (>10 newlines, >2000 chars)",
+      "tags": [
+        "security",
+        "prompt-injection",
+        "detection"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:35:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "o6r9n234",
+      "lesson": "Sliding window rate limiter with automatic backoff - track timestamps, clean old entries, calculate wait time and sleep if needed",
+      "tags": [
+        "rate-limiting",
+        "resilience",
+        "api"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:35:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "p7s0o345",
+      "lesson": "SKYNET autonomous goal system: prioritized goals with status tracking (active/completed), autonomous_decision_cycle runs periodically, decisions logged to DB",
+      "tags": [
+        "autonomy",
+        "goals",
+        "self-directed",
+        "architecture"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:35:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "q8t1p456",
+      "lesson": "Obsidian vault integration for AI memory - hierarchical .md files with frontmatter, topic-to-file mapping, automatic backlinking, search via glob",
+      "tags": [
+        "memory",
+        "obsidian",
+        "persistence",
+        "knowledge-graph"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:35:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "r9u2q567",
+      "lesson": "Per-user message history tracking enables flood detection - store last N messages with timestamps, check for rapid-fire or duplicates",
+      "tags": [
+        "security",
+        "flood-protection",
+        "per-user",
+        "tracking"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:35:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "s0v3r678",
+      "lesson": "Hash-based deduplication skips already-processed items - store content hash in DB, check before expensive operations (VISION, WATCHDOG patterns)",
+      "tags": [
+        "deduplication",
+        "optimization",
+        "hash",
+        "database"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "t1w4s789",
+      "lesson": "Snooze pattern for monitoring - temporarily exclude items from checks, auto-expire after timeout, user can manually unsnooze",
+      "tags": [
+        "monitoring",
+        "snooze",
+        "user-experience",
+        "patterns"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T15:45:00.000000",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

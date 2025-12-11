@@ -205,6 +205,33 @@
       "learned_at": "2025-12-11T13:01:12.446788",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "d4e6b891",
+      "lesson": "Subconscious pre-filtering uses cheap local AI to determine memory needs before expensive operations",
+      "tags": [
+        "optimization",
+        "memory",
+        "pre-filter",
+        "cost"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T13:45:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "e5f7c902",
+      "lesson": "Garbage filtering prevents AI-generated filler text from polluting memory storage",
+      "tags": [
+        "memory",
+        "quality",
+        "filtering"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T13:45:00.000000",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

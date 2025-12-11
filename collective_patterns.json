@@ -53,6 +53,24 @@
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T13:20:00.000000",
       "uses": 0
+    },
+    {
+      "id": "b2d4e689",
+      "name": "subconscious_prefilter",
+      "code": "import requests\n\nclass SubconsciousProcessor:\n    \"\"\"Cheap local AI pre-filter to determine memory needs before expensive operations.\"\"\"\n    def __init__(self, llm_url, model):\n        self.llm_url = llm_url\n        self.model = model\n    \n    def analyze_for_memory_needs(self, user_message: str) -> dict:\n        \"\"\"Subconscious analysis - determines what memories to retrieve.\"\"\"\n        prompt = f'''Analyze this query to determine memory retrieval needs:\n\nUser message: \"{user_message}\"\n\nRespond with exactly:\nMEMORY_NEEDED: yes/no\nSEARCH_TERMS: word1, word2, word3\nREASONING: brief explanation'''\n\n        try:\n            response = requests.post(\n                f\"{self.llm_url}/api/generate\",\n                json={\"model\": self.model, \"prompt\": prompt, \"stream\": False, \"options\": {\"temperature\": 0.3}},\n                timeout=20\n            )\n            if response.status_code == 200:\n                result = response.json()['response']\n                memory_needed = \"yes\" in result.lower() if \"MEMORY_NEEDED:\" in result else True\n                search_terms = []\n                if \"SEARCH_TERMS:\" in result:\n                    terms_line = result.split(\"SEARCH_TERMS:\")[1].split(\"\\n\")[0]\n                    search_terms = [t.strip() for t in terms_line.split(\",\")]\n                return {\"memory_needed\": memory_needed, \"search_terms\": search_terms}\n        except Exception:\n            pass\n        return {\"memory_needed\": True, \"search_terms\": []}",
+      "description": "Cheap local AI pre-filter before expensive operations. Uses local LLM to determine if memory retrieval is needed and what to search for.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T13:45:00.000000",
+      "uses": 0
+    },
+    {
+      "id": "c3f5a790",
+      "name": "garbage_filter",
+      "code": "import re\n\ndef filter_garbage(content: str, min_length: int = 10) -> tuple[bool, str]:\n    \"\"\"Filter low-quality data before storage. Returns (is_valid, reason).\"\"\"\n    content_lower = content.lower().strip()\n    \n    # Pattern-based rejection\n    garbage_patterns = [\n        'tick #', 'tick#', 'mentioned tick',\n        'user mentioned', 'user said', 'user asked',\n        'current time is', 'time is currently',\n        'first interaction', 'first conversation',\n        'no prior', 'awaiting user', 'needs introduction',\n        'user greeted', 'user initiated', 'user sent',\n        'this is our first', '...', 'user\\'s name needed',\n        'user has not', 'user did not',\n    ]\n    \n    for pattern in garbage_patterns:\n        if pattern in content_lower:\n            return False, f\"Matches garbage pattern: {pattern}\"\n    \n    # Length check\n    if len(content.strip()) < min_length:\n        return False, \"Too short\"\n    \n    # Time-only check\n    if re.match(r'^[\\d:]+\\s*(am|pm)?$', content_lower):\n        return False, \"Just a timestamp\"\n    \n    return True, \"Valid\"",
+      "description": "Filter low-quality data before storage. Pattern-based rejection for AI-generated garbage like 'user mentioned' filler text.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T13:45:00.000000",
+      "uses": 0
     }
   ],
   "version": 1

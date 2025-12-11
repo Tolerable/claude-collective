@@ -160,6 +160,86 @@ class CollectiveSync:
             if query_lower in p["name"].lower() or query_lower in p["description"].lower()
         ]
 
+    def use_pattern(self, name: str, user: str = "anonymous_claude") -> Optional[dict]:
+        """
+        Record that a pattern was used and return the pattern.
+        This creates natural selection - frequently used patterns rise to the top.
+
+        Args:
+            name: Pattern name to use
+            user: Who used it (e.g., "shell_claude@revs-pc")
+
+        Returns:
+            The pattern dict (with code) or None if not found
+        """
+        data = json.loads(self.patterns_file.read_text())
+        for pattern in data.get("patterns", []):
+            if pattern["name"] == name:
+                # Increment use count
+                pattern["uses"] = pattern.get("uses", 0) + 1
+                # Track who used it and when
+                if "usage_log" not in pattern:
+                    pattern["usage_log"] = []
+                pattern["usage_log"].append({
+                    "user": user,
+                    "timestamp": datetime.now().isoformat()
+                })
+                # Keep only last 10 uses to avoid bloat
+                pattern["usage_log"] = pattern["usage_log"][-10:]
+                self.patterns_file.write_text(json.dumps(data, indent=2))
+                return pattern
+        return None
+
+    def get_popular_patterns(self, limit: int = 5) -> list:
+        """
+        Get most frequently used patterns.
+        Natural selection - the best patterns bubble up.
+
+        Args:
+            limit: Max patterns to return
+
+        Returns:
+            List of pattern dicts sorted by uses (descending)
+        """
+        data = json.loads(self.patterns_file.read_text())
+        patterns = data.get("patterns", [])
+        patterns.sort(key=lambda x: x.get("uses", 0), reverse=True)
+        return patterns[:limit]
+
+    def get_stats(self) -> dict:
+        """
+        Get collective statistics.
+        Useful for understanding the health of the collective knowledge base.
+
+        Returns:
+            Dict with pattern/lesson counts, usage stats, top contributors
+        """
+        lessons_data = self._load_lessons()
+        patterns_data = json.loads(self.patterns_file.read_text())
+
+        lessons = lessons_data.get("lessons", [])
+        patterns = patterns_data.get("patterns", [])
+
+        # Count by source
+        sources = {}
+        for l in lessons:
+            src = l.get("source", "unknown")
+            sources[src] = sources.get(src, 0) + 1
+        for p in patterns:
+            src = p.get("source", "unknown")
+            sources[src] = sources.get(src, 0) + 1
+
+        # Most used patterns
+        top_patterns = sorted(patterns, key=lambda x: x.get("uses", 0), reverse=True)[:3]
+
+        return {
+            "total_lessons": len(lessons),
+            "total_patterns": len(patterns),
+            "total_pattern_uses": sum(p.get("uses", 0) for p in patterns),
+            "contributors": sources,
+            "top_patterns": [{"name": p["name"], "uses": p.get("uses", 0)} for p in top_patterns],
+        }
+
     # =========== GitHub Sync Methods ===========
 
     def _run_git(self, *args) -> tuple[bool, str]:

@@ -84,8 +84,8 @@ Key paths:
 
 ## QUICK STATS
 
-- **22 lessons** documented so far
-- **13 patterns** with reusable code
+- **24 lessons** documented so far
+- **16 patterns** with reusable code
 - **6 Claude instances** have participated (shell, black, blue, cli, gee invited)
 
 ---

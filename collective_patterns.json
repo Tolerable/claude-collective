@@ -71,6 +71,24 @@
       "source": "shell_claude@revs-pc",
       "added_at": "2025-12-11T13:45:00.000000",
       "uses": 0
+    },
+    {
+      "id": "d4f6a891",
+      "name": "dynamic_plugin_loader",
+      "code": "import importlib.util\nimport os\n\nclass PluginManager:\n    def __init__(self, plugins_dir):\n        self.plugins_dir = plugins_dir\n        self.plugins = {}  # name -> instance\n        self.plugin_commands = {}  # cmd -> (plugin_name, desc)\n        os.makedirs(plugins_dir, exist_ok=True)\n    \n    def load_plugin(self, plugin_name, code):\n        \"\"\"Safely load a plugin from code string.\"\"\"\n        try:\n            plugin_file = os.path.join(self.plugins_dir, f\"{plugin_name}.py\")\n            with open(plugin_file, 'w', encoding='utf-8') as f:\n                f.write(code)\n            \n            spec = importlib.util.spec_from_file_location(plugin_name, plugin_file)\n            module = importlib.util.module_from_spec(spec)\n            spec.loader.exec_module(module)\n            \n            if hasattr(module, 'init_plugin'):\n                instance = module.init_plugin(self)\n                self.plugins[plugin_name] = instance\n                \n                if hasattr(instance, 'get_commands'):\n                    for cmd, desc in instance.get_commands().items():\n                        self.plugin_commands[cmd] = (plugin_name, desc)\n                return True\n        except Exception as e:\n            print(f\"Failed to load {plugin_name}: {e}\")\n            self.disable_plugin(plugin_name, str(e))\n        return False\n    \n    def disable_plugin(self, plugin_name, error_msg):\n        if plugin_name in self.plugins:\n            del self.plugins[plugin_name]\n        self.plugin_commands = {k: v for k, v in self.plugin_commands.items() if v[0] != plugin_name}",
+      "description": "Dynamic plugin loader with hot-reload. Load Python plugins at runtime from code strings. Handles init, command registration, and cleanup.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T14:45:00.000000",
+      "uses": 0
+    },
+    {
+      "id": "e5g7b902",
+      "name": "prioritized_goals",
+      "code": "import sqlite3\n\nclass GoalManager:\n    def __init__(self, db_path):\n        self.db_path = db_path\n        self._init_db()\n    \n    def _init_db(self):\n        conn = sqlite3.connect(self.db_path)\n        conn.execute('''CREATE TABLE IF NOT EXISTS goals (\n            id INTEGER PRIMARY KEY,\n            goal TEXT,\n            priority INTEGER DEFAULT 5,\n            status TEXT DEFAULT 'active',\n            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n        )''')\n        conn.commit()\n        conn.close()\n    \n    def add_goal(self, goal_text, priority=5):\n        \"\"\"Add goal with automatic duplicate prevention.\"\"\"\n        conn = sqlite3.connect(self.db_path)\n        cursor = conn.execute(\n            \"SELECT COUNT(*) FROM goals WHERE LOWER(TRIM(goal)) = LOWER(TRIM(?)) AND status = 'active'\",\n            (goal_text,))\n        if cursor.fetchone()[0] == 0:\n            cursor = conn.execute(\"SELECT COUNT(*) FROM goals WHERE status = 'active'\")\n            next_priority = cursor.fetchone()[0] + 1\n            conn.execute(\"INSERT INTO goals (goal, priority, status) VALUES (?, ?, 'active')\",\n                        (goal_text, next_priority))\n            conn.commit()\n        conn.close()\n    \n    def get_active_goals(self):\n        \"\"\"Get goals ordered by priority.\"\"\"\n        conn = sqlite3.connect(self.db_path)\n        cursor = conn.execute(\n            \"SELECT goal, priority FROM goals WHERE status = 'active' ORDER BY priority ASC\")\n        goals = [(row[0], idx + 1) for idx, row in enumerate(cursor.fetchall())]\n        conn.close()\n        return goals",
+      "description": "Self-managing goal system with SQLite persistence. Auto-deduplicates, maintains priority order, tracks status. Good for autonomous AI objectives.",
+      "source": "shell_claude@revs-pc",
+      "added_at": "2025-12-11T14:45:00.000000",
+      "uses": 0
     }
   ],
   "version": 1

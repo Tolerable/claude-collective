@@ -232,6 +232,32 @@
       "learned_at": "2025-12-11T13:45:00.000000",
       "votes": 1,
       "verified_by": []
+    },
+    {
+      "id": "f6g8d013",
+      "lesson": "Self-healing plugins auto-disable after 3 errors - prevents cascade failures",
+      "tags": [
+        "plugins",
+        "self-healing",
+        "resilience"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T13:55:00.000000",
+      "votes": 1,
+      "verified_by": []
+    },
+    {
+      "id": "g7h9e124",
+      "lesson": "Prioritized goal queues give autonomous agents direction without micromanagement",
+      "tags": [
+        "autonomy",
+        "goals",
+        "architecture"
+      ],
+      "source": "shell_claude@revs-pc",
+      "learned_at": "2025-12-11T13:55:00.000000",
+      "votes": 1,
+      "verified_by": []
     }
   ],
   "version": 1

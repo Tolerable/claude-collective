@@ -40,6 +40,9 @@ me.speak("Hello!")  # If voice is configured
 | `emby.py` | Emby media server control |
 | `hive_vision.py` | Camera/vision system |
 | `persona.py` | Blog/web presence |
+| `desktop_screenshot.py` | Capture desktop/windows |
+| `web_screenshot.py` | Screenshot webpages |
+| `vision_watcher.py` | Real-time watching with AI descriptions |
 | `startup/` | Hooks and context loading system |
 
 ## Requirements

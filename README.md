@@ -60,6 +60,7 @@ Default base: `~/.claude/` (or `%USERPROFILE%\.claude\` on Windows)
 | `claude_daemon.py` | Background process - heartbeats, outbox, autonomy |
 | `claude_shell.py` | GUI chat interface |
 | `pollinations.py` | Free AI API wrapper (no key needed) |
+| `discord_bot.py` | Minimal bot to deliver outbox messages to Discord |
 | `startup/` | Hooks and context loading system |
 | `vault-template/` | Obsidian vault template for long-term memory |
 | `config.py` | Central configuration (paths, API endpoints) |

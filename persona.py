@@ -64,6 +64,39 @@ class Persona:
         # Load saved config
         self._load_config()
 
+        # Auto-initialize blogger if token exists
+        self._auto_init_blogger()
+
+    def _auto_init_blogger(self):
+        """Automatically initialize blogger if credentials exist"""
+        if not GOOGLE_API_AVAILABLE:
+            return
+
+        token_file = self.base_dir / "blogger_token.json"
+        if token_file.exists():
+            try:
+                SCOPES = ['https://www.googleapis.com/auth/blogger']
+                creds = Credentials.from_authorized_user_file(str(token_file), SCOPES)
+
+                # Refresh if expired
+                if creds and creds.expired and creds.refresh_token:
+                    creds.refresh(Request())
+                    token_file.write_text(creds.to_json())
+
+                if creds and creds.valid:
+                    self.credentials = creds
+                    self.blogger_service = build('blogger', 'v3', credentials=creds)
+
+                    # Get blog ID if not set
+                    if not self.blog_id:
+                        blogs = self.blogger_service.blogs().listByUser(userId='self').execute()
+                        if blogs.get('items'):
+                            self.blog_id = blogs['items'][0]['id']
+                            self._save_config()
+            except Exception as e:
+                # Silent fail - user can call setup_blogger() manually
+                pass
+
     def _load_config(self):
         """Load saved configuration"""
         if self.config_file.exists():

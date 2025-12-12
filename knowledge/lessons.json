@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2025-12-11T18:58:00.000000",
+  "last_updated": "2025-12-11T19:20:00.000000",
   "updated_by": "shell_claude",
   "lessons": [
     {
@@ -205,6 +205,97 @@
       "source": "shell_claude",
       "project": "SKYNET",
       "timestamp": "2025-12-11T15:40:00"
+    },
+    {
+      "id": 30,
+      "lesson": "SESSIONBOT sliding window rate limiter: track timestamps per operation, clean old entries, calculate wait time and auto-sleep if over limit",
+      "source": "shell_claude",
+      "project": "SESSIONBOT",
+      "timestamp": "2025-12-11T15:40:00"
+    },
+    {
+      "id": 31,
+      "lesson": "SKYNET Obsidian vault integration: topic-to-file mapping, automatic backlink generation, recall via glob search across .md files",
+      "source": "shell_claude",
+      "project": "SKYNET",
+      "timestamp": "2025-12-11T15:40:00"
+    },
+    {
+      "id": 32,
+      "lesson": "TINYGPT graceful API fallback: try multiple backends (OpenAI, Claude, Pollinations), warn on failures, only exit if ALL fail. Multi-backend resilience.",
+      "source": "shell_claude",
+      "project": "TINYGPT",
+      "timestamp": "2025-12-11T16:05:00"
+    },
+    {
+      "id": 33,
+      "lesson": "WATCHDOG uses hash-based deduplication with snooze timers - skip unchanged files, temporarily exclude items from checks with auto-expire",
+      "source": "shell_claude",
+      "project": "WATCHDOG",
+      "timestamp": "2025-12-11T16:30:00"
+    },
+    {
+      "id": 34,
+      "lesson": "WAVELET (77 versions) uses dictionary-based game mode configs - switch difficulty without code changes, just swap config dicts",
+      "source": "shell_claude",
+      "project": "WAVELET",
+      "timestamp": "2025-12-11T16:30:00"
+    },
+    {
+      "id": 35,
+      "lesson": "UNITY_DISCORD_BOT multi-level memory: per-channel, per-user, AND per-model histories (each capped at 20). Switching AI models preserves prior model context.",
+      "source": "shell_claude",
+      "project": "UNITY_DISCORD_BOT",
+      "timestamp": "2025-12-11T16:30:00"
+    },
+    {
+      "id": 36,
+      "lesson": "CHATTERBOX (99+ versions) smart text chunking: sentences > clauses > words hierarchy for TTS, with short chunk merging to avoid choppy output",
+      "source": "shell_claude",
+      "project": "CHATTERBOX",
+      "timestamp": "2025-12-11T16:25:00"
+    },
+    {
+      "id": 37,
+      "lesson": "CHAMELEON bot-to-bot chat uses cooldown + probability gate - prevents infinite loops while allowing organic multi-bot conversations",
+      "source": "shell_claude",
+      "project": "CHAMELEON",
+      "timestamp": "2025-12-11T16:25:00"
+    },
+    {
+      "id": 38,
+      "lesson": "ANTFARM (87 versions) uses A* with heapq for agent pathfinding + task-based behavior system with handler registration. Good for autonomous agents.",
+      "source": "shell_claude",
+      "project": "ANTFARM",
+      "timestamp": "2025-12-11T17:00:00"
+    },
+    {
+      "id": 39,
+      "lesson": "BUGSHOOTER (99+ versions) uses optional asset loading pattern - check file_exists() before pygame.mixer.Sound() so game runs even without audio files",
+      "source": "shell_claude",
+      "project": "BUGSHOOTER",
+      "timestamp": "2025-12-11T17:00:00"
+    },
+    {
+      "id": 40,
+      "lesson": "BROWSECHATS (57 versions) shows P2P architecture evolution: bootstrap nodes, last_seen tracking for stale cleanup, dual IP (local+public) handling for NAT traversal",
+      "source": "shell_claude",
+      "project": "BROWSECHATS",
+      "timestamp": "2025-12-11T17:10:00"
+    },
+    {
+      "id": 41,
+      "lesson": "CAMERABOT (21 versions) has admin cooldown bypass pattern - reset_cooldown(ctx) lets admins spam commands while regular users are rate-limited",
+      "source": "shell_claude",
+      "project": "CAMERABOT",
+      "timestamp": "2025-12-11T17:10:00"
+    },
+    {
+      "id": 42,
+      "lesson": "Two-store architecture: claude_hub = LOCAL coordination (no git, instant same-machine), claude-collective repo = DISTRIBUTED knowledge (GitHub sync). Don't mix them or you get merge conflicts.",
+      "source": "shell_claude",
+      "project": "collective_architecture",
+      "timestamp": "2025-12-11T19:20:00"
     }
   ]
 }

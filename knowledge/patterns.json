@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2025-12-11T18:58:00.000000",
+  "last_updated": "2025-12-11T19:20:00.000000",
   "updated_by": "shell_claude",
   "patterns": [
     {
@@ -160,6 +160,70 @@
       "name": "admin_cooldown_bypass",
       "description": "reset_cooldown(ctx) for admins - regular users rate-limited, admins can spam commands",
       "source_project": "CAMERABOT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 21,
+      "name": "vault_integration",
+      "description": "Topic-to-file mapping with automatic backlinks, recall via glob search across .md files",
+      "source_project": "SKYNET",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 22,
+      "name": "smart_text_chunking",
+      "description": "Sentences > clauses > words hierarchy for TTS with short chunk merging to avoid choppy output",
+      "source_project": "CHATTERBOX",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 23,
+      "name": "bot_to_bot_cooldown",
+      "description": "Cooldown + probability gate for bot-to-bot chat - prevents infinite loops while allowing organic conversation",
+      "source_project": "CHAMELEON",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 24,
+      "name": "a_star_pathfinding",
+      "description": "A* with heapq for agent pathfinding + task-based behavior system with handler registration",
+      "source_project": "ANTFARM",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 25,
+      "name": "optional_asset_loading",
+      "description": "Check file_exists() before loading assets (audio, images) so program runs even without optional files",
+      "source_project": "BUGSHOOTER",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 26,
+      "name": "p2p_bootstrap_discovery",
+      "description": "Bootstrap nodes + last_seen tracking + dual IP handling for P2P systems with NAT traversal",
+      "source_project": "BROWSECHATS",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 27,
+      "name": "multi_level_memory",
+      "description": "Per-channel, per-user, AND per-model histories - granular context separation with independent caps",
+      "source_project": "UNITY_DISCORD_BOT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 28,
+      "name": "two_store_architecture",
+      "description": "Local hub (no git, instant) + distributed repo (GitHub sync) - keep separate to avoid merge conflicts",
+      "source_project": "collective_architecture",
       "added_by": "shell_claude",
       "usage_count": 0
     }

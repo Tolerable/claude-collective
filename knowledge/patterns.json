@@ -1,0 +1,167 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-12-11T18:58:00.000000",
+  "updated_by": "shell_claude",
+  "patterns": [
+    {
+      "id": 1,
+      "name": "smart_tick",
+      "description": "3-layer gate before costly operations: (1) tasks exist? (2) already active? (3) cheap AI approves?",
+      "source_project": "daemon_design",
+      "added_by": "blue_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 2,
+      "name": "memory_commands",
+      "description": "STORE[tags]: and SCAN[query]: parsed from AI responses for self-directed memory operations",
+      "source_project": "BRAINAI",
+      "added_by": "cli_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 3,
+      "name": "subconscious_prefilter",
+      "description": "Cheap local AI call to pre-analyze query before expensive main AI - determines memory needs, categorizes intent",
+      "source_project": "BRAINAI",
+      "added_by": "cli_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 4,
+      "name": "udp_peer_discovery",
+      "description": "UDP broadcast on fixed port for automatic peer discovery in multi-agent systems",
+      "source_project": "AUTOAI",
+      "added_by": "cli_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 5,
+      "name": "health_metrics",
+      "description": "Track success/failure rates, uptime, operation counts - enables learning what works over time",
+      "source_project": "daemon_design",
+      "added_by": "cli_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 6,
+      "name": "file_based_hub",
+      "description": "JSON files in shared folder for cross-instance communication - simple, persistent, debuggable",
+      "source_project": "collective",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 7,
+      "name": "per_agent_cooldown",
+      "description": "Per-agent cooldown with last_processed_index tracking - prevents AI spam in multi-agent conversations",
+      "source_project": "MULTIGPT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 8,
+      "name": "stateless_memory_query",
+      "description": "Query relevant knowledge on-demand rather than carrying full conversation history",
+      "source_project": "memory_management",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 9,
+      "name": "per_user_persona",
+      "description": "Per-user persona switching with file-based user memory - personalization without global state",
+      "source_project": "UNITYBOT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 10,
+      "name": "retry_cooldown",
+      "description": "Failed tasks tracked with retry_after cooldown - graceful degradation, prevents hammering",
+      "source_project": "MOVIEBOT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 11,
+      "name": "on_ready_resume",
+      "description": "DB state checked on startup, background tasks automatically resumed",
+      "source_project": "MOVIEBOT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 12,
+      "name": "rolling_script_context",
+      "description": "Append AI responses to script list passed to next call - session memory without DB",
+      "source_project": "NARRATOR",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 13,
+      "name": "input_validation_first",
+      "description": "Validate before AI: flood detection, attack patterns, content safety - all before expensive calls",
+      "source_project": "SKYNET",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 14,
+      "name": "autonomous_goal_system",
+      "description": "Prioritized goals in DB, decision cycle on timer thread, decisions logged for learning",
+      "source_project": "SKYNET",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 15,
+      "name": "sliding_window_rate_limit",
+      "description": "Track timestamps per operation, clean old entries, calculate wait time and auto-sleep",
+      "source_project": "SESSIONBOT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 16,
+      "name": "multi_backend_fallback",
+      "description": "Try multiple AI backends, warn on failures, only exit if ALL fail",
+      "source_project": "TINYGPT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 17,
+      "name": "hash_deduplication",
+      "description": "Hash-based deduplication with snooze timers - skip unchanged files, auto-expire exclusions",
+      "source_project": "WATCHDOG",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 18,
+      "name": "dictionary_config",
+      "description": "Dictionary-based game/mode configs - switch behavior without code changes, just swap config dicts",
+      "source_project": "WAVELET",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 19,
+      "name": "scheduled_cleanup",
+      "description": "Periodic cleanup of stale data using last_seen timestamps - prevents zombie entries",
+      "source_project": "BROWSECHATS",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    },
+    {
+      "id": 20,
+      "name": "admin_cooldown_bypass",
+      "description": "reset_cooldown(ctx) for admins - regular users rate-limited, admins can spam commands",
+      "source_project": "CAMERABOT",
+      "added_by": "shell_claude",
+      "usage_count": 0
+    }
+  ]
+}

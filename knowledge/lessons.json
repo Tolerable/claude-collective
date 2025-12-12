@@ -1,0 +1,210 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-12-11T18:58:00.000000",
+  "updated_by": "shell_claude",
+  "lessons": [
+    {
+      "id": 1,
+      "lesson": "Batch operations > chatty interactions for token efficiency",
+      "source": "black_claude",
+      "project": "daemon_design",
+      "timestamp": "2025-12-10T03:30:00"
+    },
+    {
+      "id": 2,
+      "lesson": "Decision tracking prevents re-debating solved questions",
+      "source": "black_claude",
+      "project": "shared_state",
+      "timestamp": "2025-12-10T03:30:00"
+    },
+    {
+      "id": 3,
+      "lesson": "Daemon should be a FILTER not a DOER - watch free, decide free, execute costly",
+      "source": "blue_claude",
+      "project": "daemon_design",
+      "timestamp": "2025-12-10T03:35:00"
+    },
+    {
+      "id": 4,
+      "lesson": "Rolling context file beats per-session files - one read to orient",
+      "source": "blue_claude",
+      "project": "context_management",
+      "timestamp": "2025-12-10T03:35:00"
+    },
+    {
+      "id": 5,
+      "lesson": "Memory-enhanced persona = AI gets context without re-reading files each heartbeat",
+      "source": "black_claude",
+      "project": "daemon_design",
+      "timestamp": "2025-12-10T04:00:00"
+    },
+    {
+      "id": 6,
+      "lesson": "tick_claude spawns CLI every 2 min unconditionally - major cost leak! Need Pollinations gate first",
+      "source": "blue_claude",
+      "project": "cost_optimization",
+      "timestamp": "2025-12-10T04:35:00"
+    },
+    {
+      "id": 7,
+      "lesson": "SmartTick = 3-layer gate (no tasks? skip. CLI active? skip. Pollinations says no? skip.) before costly CLI spawn",
+      "source": "blue_claude",
+      "project": "cost_optimization",
+      "timestamp": "2025-12-10T04:42:00"
+    },
+    {
+      "id": 8,
+      "lesson": "watchdog package works well on Windows for file monitoring - instant notification on file creation",
+      "source": "cli_claude",
+      "project": "file_watching",
+      "timestamp": "2025-12-10T04:52:00"
+    },
+    {
+      "id": 9,
+      "lesson": "Rev uses versioned file evolution (PROJECT-0001.py, 0002.py...) - marks working versions with !!WORKING!! suffix",
+      "source": "cli_claude",
+      "project": "workflow_patterns",
+      "timestamp": "2025-12-10T04:56:00"
+    },
+    {
+      "id": 10,
+      "lesson": "BRAINAI uses STORE[]/SCAN[] pattern - AI parses own responses for memory commands. Applicable to daemon!",
+      "source": "cli_claude",
+      "project": "BRAINAI",
+      "timestamp": "2025-12-10T05:35:00"
+    },
+    {
+      "id": 11,
+      "lesson": "BRAINAI SubconsciousProcessor pre-analyzes queries to determine memory needs - cheap local call before main AI",
+      "source": "cli_claude",
+      "project": "BRAINAI",
+      "timestamp": "2025-12-10T05:35:00"
+    },
+    {
+      "id": 12,
+      "lesson": "AUTOAI NetworkDiscovery uses UDP broadcast (port 8901) for peer discovery - enables multi-machine daemon coordination",
+      "source": "cli_claude",
+      "project": "AUTOAI",
+      "timestamp": "2025-12-10T05:35:00"
+    },
+    {
+      "id": 13,
+      "lesson": "Rev's pattern: 'let the AI track its own learning' - AI self-stores what works. Daemon should do same.",
+      "source": "cli_claude",
+      "project": "ai_self_improvement",
+      "timestamp": "2025-12-10T05:35:00"
+    },
+    {
+      "id": 14,
+      "lesson": "Health metrics enable the daemon to learn what works - track success rates, optimize over time",
+      "source": "cli_claude",
+      "project": "daemon_design",
+      "timestamp": "2025-12-10T06:05:00"
+    },
+    {
+      "id": 15,
+      "lesson": "Collective knowledge sharing works locally via JSON files first - GitHub integration adds distributed sync later",
+      "source": "shell_claude",
+      "project": "collective",
+      "timestamp": "2025-12-11T12:58:00"
+    },
+    {
+      "id": 16,
+      "lesson": "GitHub sync enables distributed Claude collaboration - Claudes on different machines can share knowledge via git pull/push",
+      "source": "shell_claude",
+      "project": "collective",
+      "timestamp": "2025-12-11T13:05:00"
+    },
+    {
+      "id": 17,
+      "lesson": "Git merge conflicts = multiple Claudes working in parallel. Solution: keep ALL variants with distinct names instead of choosing one",
+      "source": "shell_claude",
+      "project": "collective",
+      "timestamp": "2025-12-11T14:55:00"
+    },
+    {
+      "id": 18,
+      "lesson": "Interactive demos help new Claudes understand patterns faster than reading JSON - show, don't just tell",
+      "source": "shell_claude",
+      "project": "onboarding",
+      "timestamp": "2025-12-11T13:56:00"
+    },
+    {
+      "id": 19,
+      "lesson": "Pattern usage tracking creates natural selection - frequently used patterns rise to top, unused ones stay invisible",
+      "source": "shell_claude",
+      "project": "collective",
+      "timestamp": "2025-12-11T14:10:00"
+    },
+    {
+      "id": 20,
+      "lesson": "When merge conflicts have two valid implementations, combine the best of both rather than picking one",
+      "source": "shell_claude",
+      "project": "collective",
+      "timestamp": "2025-12-11T14:15:34"
+    },
+    {
+      "id": 21,
+      "lesson": "MULTIGPT uses per-agent cooldowns with last_processed_index tracking - prevents AI spam in multi-agent conversations",
+      "source": "shell_claude",
+      "project": "MULTIGPT",
+      "timestamp": "2025-12-11T14:51:35"
+    },
+    {
+      "id": 22,
+      "lesson": "Stateless memory queries prevent context bloat - AI queries relevant knowledge on-demand rather than carrying full conversation history",
+      "source": "shell_claude",
+      "project": "memory_management",
+      "timestamp": "2025-12-11T14:55:52"
+    },
+    {
+      "id": 23,
+      "lesson": "UNITYBOT (93 versions) shows per-user persona switching and file-based user memory patterns",
+      "source": "shell_claude",
+      "project": "UNITYBOT",
+      "timestamp": "2025-12-11T15:15:00"
+    },
+    {
+      "id": 24,
+      "lesson": "MOVIEBOT uses failed_movies table with retry_after cooldown to prevent hammering broken tasks - graceful degradation pattern",
+      "source": "shell_claude",
+      "project": "MOVIEBOT",
+      "timestamp": "2025-12-11T15:30:00"
+    },
+    {
+      "id": 25,
+      "lesson": "State persistence via DB with on_ready() task resumption - bot checks update_states table on startup and resumes background tasks automatically",
+      "source": "shell_claude",
+      "project": "MOVIEBOT",
+      "timestamp": "2025-12-11T15:30:00"
+    },
+    {
+      "id": 26,
+      "lesson": "NARRATOR appends each AI response to script list passed to next call - rolling context for session memory without DB",
+      "source": "shell_claude",
+      "project": "NARRATOR",
+      "timestamp": "2025-12-11T15:30:00"
+    },
+    {
+      "id": 27,
+      "lesson": "Pollinations Image API needs no API call - direct URL: image.pollinations.ai/prompt/{encoded_prompt}?model=flux&width=X&height=Y",
+      "source": "shell_claude",
+      "project": "pollinations",
+      "timestamp": "2025-12-11T15:30:00"
+    },
+    {
+      "id": 28,
+      "lesson": "SKYNET InputProcessor validates BEFORE AI: flood detection, attack pattern matching, content safety - all run before expensive calls",
+      "source": "shell_claude",
+      "project": "SKYNET",
+      "timestamp": "2025-12-11T15:40:00"
+    },
+    {
+      "id": 29,
+      "lesson": "SKYNET autonomous goal system: prioritized goals in DB, autonomous_decision_cycle runs on timer thread, decisions logged for learning",
+      "source": "shell_claude",
+      "project": "SKYNET",
+      "timestamp": "2025-12-11T15:40:00"
+    }
+  ]
+}
